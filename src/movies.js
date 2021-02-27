@@ -49,16 +49,8 @@ function orderByYear(films) {
 
   return filmsCopy.sort(function (a, b) {
     if (a.year === b.year) {
-      //
       // same year: sort by title then
-      //
-      if (a.title === b.title) {
-        return 0;
-      } else if (a.title < b.title) {
-        return -1;
-      } else {
-        return 1;
-      }
+      return a.title.localeCompare(b.title)
     } else if (a.year < b.year) {
       return -1; // a before b
     } else {
