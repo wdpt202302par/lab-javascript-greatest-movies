@@ -72,17 +72,24 @@ function turnHoursToMinutes(films) {
   return films.map(film => {
     let duration = film.duration; // '3h 22min' or '5h' or '22min' cases possible
 
+    //
+    // Let's extract `hours` and `mins` from duration
+    //
+    // 3 cases:
+    //   - Case 1: '3h 22min' (hours and minutes)
+    //   - Case 2: '5h'       (only hours)
+    //   - Case 3: '22min'    (only minutes)
+    //
+    
     let hours = 0;
     let mins = 0;
-
-    //
-    // 3 cases: '3h 22min' or '5h' or '22min'
-    //
 
     const isH = (duration.includes('h'));
     const isMin = (duration.includes('min'));
     if (isH && isMin) {
-      // '3h 22min'
+      //
+      // Case 1: '3h 22min'
+      //
 
       let hSplit = duration.split('h ');
       let minSplit = hSplit[1].split('min');
@@ -90,10 +97,16 @@ function turnHoursToMinutes(films) {
       hours = hSplit[0];
       mins = minSplit[0];
     } else if (isH && !isMin) {
-      // '5h'
+      //
+      // Case 2: '5h'
+      //
+      
       hours = duration.split('h')[0];
     } else if (!isH && isMin) {
-      // '22min'
+      //
+      // Case 3: '22min'
+      //
+      
       mins = duration.split('min')[0]
     }
 
